@@ -10,6 +10,7 @@ function newFunction() {
       state: "Jammu & Kashmir",
       affiliation: "Jammu University",
       description: "A premier engineering institute offering quality technical education, modern labs, and strong placements.",
+      // MIET keeps its actual logo path
       logo: "assets/assets/assets/logos/miet-logo.png",
 
       courses: ["CSE", "ECE", "IT", "Civil"],
@@ -40,7 +41,7 @@ function newFunction() {
       ]
     },
 
-    // Your old demo college (kept for variety)
+    // Your old demo college — uses generic profile.png now
     {
       id: "c-user",
       name: "Your College Name Here",
@@ -49,7 +50,8 @@ function newFunction() {
       state: "YourState",
       affiliation: "Your University / Board",
       description: "Short pitch: Department strengths, labs, top courses, placements (1-2 lines).",
-      logo: "assets/assets/assets/logos/your-college.png",
+      // force generic profile for non-MIET colleges
+      logo: "assets/profile.png",
 
       courses: ["Computer Science", "Electronics", "Mechanical"],
 
@@ -78,7 +80,7 @@ function newFunction() {
       ]
     },
 
-    // Demo college for variety
+    // Demo college for variety — also uses generic profile.png
     {
       id: "c2",
       name: "City College of Science & Tech",
@@ -87,7 +89,7 @@ function newFunction() {
       state: "State B",
       affiliation: "Metro University",
       description: "Known for vibrant student life, hands-on labs and strong placements.",
-      logo: "assets/assets/assets/logos/city-college-st.png",
+      logo: "assets/profile.png",
       courses: ["Information Technology", "Civil"],
 
       faculty: [
