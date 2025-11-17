@@ -133,6 +133,18 @@ function escapeHtml(str) {
   return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 }
 
+// ---------- HELPER: resolve logo path ----------
+function resolveLogoPath(logo) {
+  // Accepts: null | filename like "miet.png" | path like "assets/logos/miet.png" | full URL
+  if (!logo) return null;
+  const s = String(logo).trim();
+  if (!s) return null;
+  if (s.startsWith('http://') || s.startsWith('https://')) return s;
+  if (s.startsWith('assets/')) return s;
+  return `assets/logos/${s}`;
+}
+// -----------------------------------------------
+
 // Toast utility with actionable Undo
 let _toastTimer = null;
 function showActionableToast(message, { actionText = null, actionCallback = null, duration = 6000 } = {}) {
@@ -195,7 +207,7 @@ function renderChips() {
   });
 }
 
-// Render list of colleges (UPDATED: shows college logo on each card)
+// Render list of colleges — MIET shows its own logo; others keep their logo or fallback to assets/profile.png
 function renderList(items) {
   listSection.innerHTML = "";
   items.forEach((c, idx) => {
@@ -205,13 +217,24 @@ function renderList(items) {
     el.style.animationDelay = `${Math.min(0.15 * idx, 0.9)}s`;
 
     const isFav = favorites.has(c.id);
-    // use college-specific logo or default
-    const cardLogo = escapeHtml(c.logo || 'assets/assets/assets/logos/default-college.png');
+
+    // Determine MIET (slug === 'miet' OR name contains 'miet')
+    const isMIET = (String(c.slug || "").toLowerCase() === "miet") || (String(c.name || "").toLowerCase().includes("miet"));
+    const profileFallback = 'assets/profile.png';
+    const mietLogoDefault = 'assets/assets/assets/logos/miet-logo.png'; // MIET default (matches data.js)
+
+    // For MIET: prefer its provided logo (resolveLogoPath), else use MIET default.
+    // For others: keep their provided logo if present (resolveLogoPath), else fallback to profile.png
+    const resolvedLogo = isMIET
+      ? (resolveLogoPath(c.logo) || mietLogoDefault)
+      : (resolveLogoPath(c.logo) || profileFallback);
+
+    const imgSrcEscaped = escapeHtml(resolvedLogo);
 
     el.innerHTML = `
       <div class="card-head" style="align-items:center">
         <div style="display:flex;gap:12px;align-items:center">
-          <img src="${cardLogo}" alt="${escapeHtml(c.name)} logo" class="card-logo" onerror="this.onerror=null;this.src='assets/assets/assets/logos/default-college.png'"/>
+          <img src="${imgSrcEscaped}" alt="${escapeHtml(c.name)} logo" class="card-logo" onerror="this.onerror=null;this.src='${profileFallback.replace(/'/g, "\\'")}'"/>
           <div>
             <h3>${escapeHtml(c.name)}</h3>
             <div class="muted">${escapeHtml(c.city)}, ${escapeHtml(c.state)}</div>
@@ -220,7 +243,7 @@ function renderList(items) {
 
         <div style="display:flex;flex-direction:column;align-items:end;gap:8px">
           <div class="badge">${escapeHtml(c.affiliation)}</div>
-          <button class="star ${isFav ? "fav" : ""}" data-fav="${c.id}" title="${isFav ? "Remove favorite" : "Add favorite"}">
+          <button class="star ${isFav ? "fav" : ""}" data-fav="${escapeHtml(c.id)}" title="${isFav ? "Remove favorite" : "Add favorite"}">
             ${isFav ? "★" : "☆"}
           </button>
         </div>
@@ -231,9 +254,9 @@ function renderList(items) {
       <div class="meta">
         <div class="muted">${(c.courses||[]).slice(0,2).join(", ")}</div>
         <div class="actions">
-          <button class="action-link" data-slug="${c.slug}">View profile</button>
-          <button class="action-link" data-open="${c.id}">Open top resource</button>
-          <button class="action-link remove" data-remove="${c.id}" title="Remove college" style="color:#ef4444">Remove</button>
+          <button class="action-link" data-slug="${escapeHtml(c.slug)}">View profile</button>
+          <button class="action-link" data-open="${escapeHtml(c.id)}">Open top resource</button>
+          <button class="action-link remove" data-remove="${escapeHtml(c.id)}" title="Remove college" style="color:#ef4444">Remove</button>
         </div>
       </div>
     `;
@@ -513,8 +536,7 @@ function openFacultyModal(fac) {
   openModal("facultyModal");
 }
 
-// Profile drawer (updated to include per-college notices + add notice per-college)
-// *** MODIFIED: includes college logo rendering with fallback ***
+// Profile drawer (MIET shows its logo; others keep their logo or fallback to assets/profile.png)
 function openProfile(college) {
   profileContent.innerHTML = "";
   profileDrawer.setAttribute("aria-hidden", "false");
@@ -557,12 +579,18 @@ function openProfile(college) {
       `).join("")
     : `<div class="muted">No notices for this college</div>`;
 
-  // Logo path (fall back to default if not provided)
-  const logoPath = college.logo || 'assets/assets/assets/logos/default-college.png';
+  // Logo: MIET shows its logo (if provided) then MIET default; others keep their logo if present, else assets/profile.png
+  const isMIET = (String(college.slug || "").toLowerCase() === "miet") || (String(college.name || "").toLowerCase().includes("miet"));
+  const profileFallback = 'assets/profile.png';
+  const mietLogoDefault = 'assets/assets/assets/logos/miet-logo.png';
+
+  const logoPath = isMIET
+    ? (resolveLogoPath(college.logo) || mietLogoDefault)
+    : (resolveLogoPath(college.logo) || profileFallback);
 
   const html = `
     <header style="display:flex;align-items:center;gap:12px">
-      <img src="${escapeHtml(logoPath)}" alt="${escapeHtml(college.name)} logo" class="college-drawer-logo" onerror="this.onerror=null;this.src='assets/assets/assets/logos/default-college.png'"/>
+      <img src="${escapeHtml(logoPath)}" alt="${escapeHtml(college.name)} logo" class="college-drawer-logo" onerror="this.onerror=null;this.src='${profileFallback}'"/>
       <div>
         <h2>${escapeHtml(college.name)}</h2>
         <div class="muted">${escapeHtml(college.city)} · ${escapeHtml(college.state)} · ${escapeHtml(college.affiliation || "")}</div>
