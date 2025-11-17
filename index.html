@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>StudyFlow — Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- =============================
+       TOP NAVBAR
+  ============================== -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+
+      <div class="brand">
+       <img src="assets/assets/logo.jpg" alt="StudyFlow logo" class="site-logo" />
+
+        <div>
+          <div class="title">StudyFlow</div>
+          <div class="subtitle">College resources & PYQs — prototype</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button id="navColleges" class="nav-btn active">Colleges</button>
+        <button id="openStudent" class="nav-btn">Student Portal</button>
+        <button id="openTeacher" class="nav-btn">Teachers Hub</button>
+        <button id="addCollege" class="nav-cta">+ Add College</button>
+      </nav>
+
+    </div>
+  </header>
+
+
+
+  <!-- =============================
+        MAIN HERO
+  ============================== -->
+  <main class="container main">
+
+    <section class="hero">
+
+      <!-- LEFT SIDE -->
+      <div class="hero-left hero-animate">
+
+        <h1 class="hero-title">Find colleges, faculty & past-year question papers — fast.</h1>
+
+        <p class="hero-sub">
+          Search across colleges, open PYQs instantly, and explore smart learning tools.
+        </p>
+
+        <!-- SEARCH -->
+        <div class="hero-actions">
+          <input id="searchInput" class="hero-search" type="search" placeholder="Search colleges, faculty, PYQs..." />
+          <button id="searchBtn" class="btn primary">Search</button>
+          <button id="clearBtn" class="btn ghost">Clear</button>
+        </div>
+
+
+        <!-- QUICK FEATURE BUTTONS -->
+        <div class="feature-actions" aria-hidden="false">
+          <button class="feature-btn" data-feature="flashcards">Adaptive Flashcards</button>
+          <button class="feature-btn" data-feature="schedule">Smart Schedule Builder</button>
+          <button class="feature-btn" id="toggleDistraction">Zero Distraction Mode</button>
+          <button class="feature-btn" data-feature="hub">College Content Hub</button>
+          <button class="feature-btn" data-feature="mock">Mock Tests</button>
+          <button class="feature-btn" data-feature="live">Live Faculty Support</button>
+          <!-- request button with badge -->
+          <button id="reqFeatureBtn" class="feature-btn" data-feature="requests">
+            Student Request Center <span id="reqBadge" class="req-badge" aria-hidden="true">0</span>
+          </button>
+        </div>
+
+        <!-- FILTER CHIPS -->
+        <div class="chips" id="filterChips" aria-hidden="false"></div>
+
+
+        <!-- STUDENT WANTS -->
+        <div class="student-wants-card" aria-live="polite">
+          <div class="student-wants-header">
+            <strong>What students want more</strong>
+            <div>
+              <button id="openSuggestModal" class="btn ghost">Suggest</button>
+            </div>
+          </div>
+
+          <div id="wantsList" class="wants-list"></div>
+
+          <div class="student-tip">
+            Tip: Suggest features & upvote other ideas.
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <!-- RIGHT SIDE -->
+      <div class="hero-art hero-animate">
+
+        <!-- BULLETIN BOARD -->
+        <div class="bulletin-card">
+          <div class="bulletin-header">
+            <strong>Bulletin Board</strong>
+
+            <div class="bulletin-controls">
+              <button id="addBulletinBtn" class="btn primary">+ Add Notice</button>
+              <button id="clearBulletinsBtn" class="btn ghost">Clear</button>
+            </div>
+          </div>
+
+          <div id="bulletinList" class="bulletin-list" aria-live="polite"></div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+
+    <!-- SEARCH META -->
+    <section class="meta-row">
+      <div id="resultCount" class="muted">0 colleges</div>
+      <div id="currentQuery" class="muted">Showing: all</div>
+    </section>
+
+
+
+
+    <!-- COLLEGE LIST -->
+    <section id="listSection" class="grid-list" aria-live="polite">
+      <!-- College cards rendered by JS -->
+    </section>
+
+  </main>
+
+
+
+
+  <!-- =============================
+        PROFILE DRAWER
+  ============================== -->
+  <aside id="profileDrawer" class="drawer" aria-hidden="true">
+    <button id="closeDrawer" class="close-btn" aria-label="Close profile">✕</button>
+    <div id="profileContent" class="drawer-content"></div>
+  </aside>
+
+  <!-- =============================
+        STUDENT PORTAL MODAL
+  ============================== -->
+  <div id="studentModal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" data-close="studentModal">✕</button>
+
+      <h3>Student Portal (Demo)</h3>
+      <p class="muted">Sign in to access saved resources & recommendations.</p>
+
+      <form id="studentForm" class="form">
+        <input type="text" id="studentEmail" placeholder="Student email" />
+        <input type="password" id="studentPass" placeholder="Password" />
+
+        <div class="form-row">
+          <button type="submit" class="btn primary">Sign in</button>
+          <button type="button" class="btn ghost" data-close="studentModal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =============================
+        TEACHER HUB MODAL
+  ============================== -->
+  <div id="teacherModal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" data-close="teacherModal">✕</button>
+
+      <h3>Teachers Hub (Demo)</h3>
+      <p class="muted">Upload notes, create announcements (demo only).</p>
+
+      <form id="teacherForm" class="form">
+        <input type="text" id="teacherEmail" placeholder="Teacher email" />
+        <input type="password" id="teacherPass" placeholder="Password" />
+
+        <div class="form-row">
+          <button type="submit" class="btn primary">Sign in</button>
+          <button type="button" class="btn ghost" data-close="teacherModal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =============================
+        ADD COLLEGE MODAL (PERSISTENT)
+  ============================== -->
+  <div id="addCollegeModal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" data-close="addCollegeModal">✕</button>
+
+      <h3>Add College</h3>
+      <p class="muted">Saved permanently using localStorage.</p>
+
+      <form id="addCollegeForm" class="form">
+        <input type="text" id="ac-name" placeholder="College name" required />
+        <input type="text" id="ac-city" placeholder="City" required />
+        <input type="text" id="ac-state" placeholder="State" />
+        <input type="text" id="ac-aff" placeholder="Affiliation" />
+
+        <div class="form-row">
+          <button type="submit" class="btn primary">Add</button>
+          <button type="button" class="btn ghost" data-close="addCollegeModal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =============================
+        BULLETIN MODAL
+  ============================== -->
+  <div id="bulletinModal" class="modal" aria-hidden="true">
+    <div class="modal-panel" style="max-width:520px; position:relative;">
+      <button class="modal-close" data-close="bulletinModal">✕</button>
+
+      <h3>Add Announcement</h3>
+
+      <form id="bulletinForm" class="form">
+        <input type="text" id="bulletinTitle" placeholder="Title (required)" required />
+
+        <textarea
+          id="bulletinBody"
+          placeholder="Message / details (required)"
+          rows="4"
+          class="textarea"
+        ></textarea>
+
+        <label class="input-row">
+          <input type="date" id="bulletinExpiry" />
+          <span>Optional expiration date</span>
+        </label>
+
+        <div class="form-row" style="justify-content:flex-end">
+          <button type="button" class="btn ghost" data-close="bulletinModal">Cancel</button>
+          <button type="submit" class="btn primary">Add Announcement</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =============================
+        FACULTY BIO MODAL
+  ============================== -->
+  <div id="facultyModal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" data-close="facultyModal">✕</button>
+      <div id="facultyModalContent"></div>
+    </div>
+  </div>
+
+  <!-- =============================
+        STUDENT SUGGESTION MODAL
+  ============================== -->
+  <div id="suggestModal" class="modal" aria-hidden="true">
+    <div class="modal-panel" style="max-width:520px;">
+      <button class="modal-close" data-close="suggestModal">✕</button>
+
+      <h3>Suggest a feature</h3>
+
+      <form id="suggestForm" class="form">
+        <input type="text" id="suggestTitle" placeholder="Short title (required)" required />
+
+        <textarea
+          id="suggestDetails"
+          placeholder="Details (optional)"
+          rows="4"
+          class="textarea"
+        ></textarea>
+
+        <div class="form-row" style="justify-content:flex-end">
+          <button type="button" class="btn ghost" data-close="suggestModal">Cancel</button>
+          <button type="submit" class="btn primary">Suggest</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- =============================
+        FEATURE MODAL
+  ============================== -->
+  <div id="featureModal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" data-close="featureModal">✕</button>
+      <div id="featureModalBody"></div>
+    </div>
+  </div>
+
+  <!-- =============================
+        STUDENT REQUEST CENTER MODALS
+  ============================== -->
+  <!-- Request submit modal -->
+  <div id="requestModal" class="modal" aria-hidden="true">
+    <div class="modal-panel" style="max-width:560px;">
+      <button class="modal-close" data-close="requestModal">✕</button>
+      <h3>Student Request Center</h3>
+      <p class="muted">Request documents, report issues or ask for form help.</p>
+
+      <form id="requestForm" class="form">
+        <label for="reqType">What do you need?</label>
+        <select id="reqType" class="input">
+          <option value="document">Document Request</option>
+          <option value="problem">Report Issue in Document</option>
+          <option value="formFill">Form Fill Assistance</option>
+          <option value="other">Other Request</option>
+        </select>
+
+        <input id="reqExtra" class="input" placeholder="Document name / problem category (optional)" />
+
+        <textarea id="reqDetails" class="textarea" placeholder="Describe your request..." rows="4"></textarea>
+
+        <div class="form-row" style="justify-content:flex-end">
+          <button type="button" class="btn ghost" data-close="requestModal">Cancel</button>
+          <button type="submit" class="btn primary">Submit Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Request list + admin actions (NO export CSV) -->
+  <div id="requestListModal" class="modal" aria-hidden="true">
+    <div class="modal-panel" style="max-width:720px;">
+      <button class="modal-close" data-close="requestListModal">✕</button>
+      <h3>Requests</h3>
+      <p class="muted">All requests submitted from this browser (demo).</p>
+
+      <div style="display:flex;gap:8px;margin:10px 0 14px;">
+        <button id="clearAllReqs" class="btn ghost">Clear all</button>
+      </div>
+
+      <div id="requestsList" style="display:flex;flex-direction:column;gap:10px;max-height:360px;overflow:auto;padding-right:6px"></div>
+    </div>
+  </div>
+
+  <!-- =============================
+        TOAST NOTIFICATION
+  ============================== -->
+  <div id="sf-toast" class="sf-toast" aria-hidden="true"></div>
+
+  <!-- =============================
+        FOOTER
+  ============================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <small>Demo prototype — StudyFlow · For college presentation</small>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+/* UPDATED style.css — original content + bulletin-style Student Wants + MIET slide logo helpers */
+:root{
+  --bg: #f6f9ff;
+  --card: #ffffff;
+  --muted:#6b7280;
+  --accent:#2563eb;
+  --accent-2:#7c3aed;
+  --glass: rgba(255,255,255,0.6);
+  --radius:14px;
+  --container:1100px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: linear-gradient(180deg,#eef2ff 0%, #f8fbff 100%);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+.container{max-width:var(--container);margin:0 auto;padding:20px}
+
+/* topbar */
+.topbar{backdrop-filter: blur(6px);position:sticky;top:0;z-index:60;border-bottom:1px solid rgba(15,23,42,0.04);background:linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.7));}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px}
+.brand{display:flex;gap:12px;align-items:center}
+.site-logo{ width:46px; height:46px; object-fit:contain; border-radius:8px; margin-right:8px }
+.logo{width:46px;height:46px}
+.title{font-weight:700;font-size:18px;color:var(--accent)}
+.subtitle{font-size:12px;color:var(--muted)}
+
+/* nav */
+.nav{display:flex;gap:8px;align-items:center}
+.nav-btn{background:transparent;border:none;padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:600}
+.nav-btn.active{background:rgba(124,58,237,0.08);color:var(--accent-2)}
+.nav-cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.14)}
+
+/* hero */
+.main{padding-top:18px;padding-bottom:30px}
+.hero{display:flex;gap:20px;align-items:center}
+.hero > div{flex:1}
+.hero-art{flex:0 0 320px}
+.hero-title{margin:0;font-size:28px;color:#0f172a}
+.hero-sub{margin:8px 0 16px;color:var(--muted)}
+.hero-actions{display:flex;gap:8px;align-items:center}
+.hero-search{flex:1;padding:12px 14px;border-radius:12px;border:1px solid rgba(15,23,42,0.06);background:transparent;font-size:15px}
+.btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 8px 20px rgba(124,58,237,0.08)}
+.btn.ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);color:var(--muted)}
+
+/* feature actions */
+.feature-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.feature-btn{
+  background:transparent;border:1px solid rgba(15,23,42,0.06);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;
+}
+.feature-btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(2,6,23,0.06);transition:all .14s ease}
+
+/* request badge */
+.req-badge{
+  display:inline-block;
+  background:var(--accent-2);
+  color:white;
+  font-size:11px;
+  padding:2px 6px;
+  border-radius:999px;
+  margin-left:8px;
+  vertical-align:middle;
+  transform-origin:center center;
+}
+
+/* chips */
+.chips{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:8px 10px;background:rgba(15,23,42,0.03);border-radius:999px;font-weight:600;color:var(--muted);cursor:pointer}
+.chip.active{background:linear-gradient(90deg, rgba(124,58,237,0.10), rgba(37,99,235,0.06));color:var(--accent-2)}
+
+/* hero art cards */
+.card-stacked{display:flex;flex-direction:column;gap:12px}
+.small-card{background:linear-gradient(180deg,#fff 0,#fbfbff);padding:10px;border-radius:12px;border:1px solid rgba(15,23,42,0.04);font-size:13px}
+.big-card{background:linear-gradient(180deg,#fff 0,#fcfbff);padding:16px;border-radius:12px;border:1px solid rgba(15,23,42,0.06);font-weight:700}
+
+/* bulletin board */
+.bulletin-card{width:100%;background:linear-gradient(180deg,#fff,#fbfbff);padding:12px;border-radius:12px;border:1px solid rgba(15,23,42,0.04);box-shadow:0 10px 30px rgba(2,6,23,0.04)}
+.bulletin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.bulletin-list{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow:auto;padding-right:6px}
+.bulletin-item{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:8px;border-radius:10px;border:1px solid rgba(2,6,23,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6))}
+.bulletin-left{display:flex;gap:10px;align-items:flex-start;flex:1}
+.bulletin-dot{width:10px;height:10px;border-radius:999px;background:var(--accent);margin-top:6px}
+.bulletin-content{flex:1}
+.bulletin-title{font-weight:700;font-size:14px}
+.bulletin-meta{font-size:12px;color:var(--muted);margin-top:6px}
+.bulletin-actions{display:flex;gap:8px;align-items:center}
+.bulletin-actions button{border:none;background:transparent;cursor:pointer;color:var(--muted)}
+
+/* meta row */
+.meta-row{display:flex;justify-content:space-between;margin:18px 0;font-size:14px;color:var(--muted)}
+
+/* grid */
+.grid-list{display:grid;grid-template-columns:1fr;gap:18px}
+
+/* ============================
+   COLLEGE CARD (ADJUSTABLE)
+   - keeps auto height with a comfortable minimum
+   - ensures long college names wrap/read nicely
+   - pushes actions to the bottom for consistent card length
+   ============================ */
+.card{
+  background:var(--card);
+  padding:16px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(2,6,23,0.06);
+  border:1px solid rgba(2,6,23,0.03);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  transition:transform .18s ease, box-shadow .18s ease;
+  /* let card grow/shrink with content, but give a gentle minimum height so short cards look balanced */
+  min-height:180px;        /* adjust the min height if you prefer taller/shorter cards */
+  height:auto;             /* explicit auto to avoid accidental fixed heights */
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.08)}
+
+/* card head: allow the title and meta to stack if the name is long */
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+
+/* card body: area that can expand and push actions to the bottom */
+.card-body{
+  flex:1 1 auto;           /* take remaining space so actions can sit at the bottom */
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* college title: responsive, wraps, and keeps line-height readable */
+.card h3{
+  margin:0;
+  font-size: clamp(16px, 2.2vw, 20px);  /* scales between 16px and 20px based on viewport */
+  line-height:1.15;
+  font-weight:700;
+  word-break:break-word;   /* break long words if needed */
+  hyphens:auto;
+  overflow-wrap:break-word;
+  /* prevent awkward single-line overflow; allow multi-line wrapping for long names */
+}
+
+/* subtle muted text (same as before) */
+.card .muted{color:var(--muted);font-size:13px;margin-top:6px}
+.card .meta{display:flex;gap:8px;align-items:center;margin-top:8px}
+.badge{padding:6px 8px;border-radius:999px;background:linear-gradient(90deg,#eef2ff,#f3e8ff);color:var(--accent);font-size:12px}
+
+/* actions: stick to bottom of the card for consistent visual height */
+.actions{display:flex;gap:8px;align-items:center;margin-top:auto}
+.action-link{background:transparent;border:none;color:var(--accent);cursor:pointer;font-weight:700}
+.star{width:34px;height:34px;border-radius:8px;border:1px solid rgba(2,6,23,0.06);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .12s;color:var(--muted)}
+.star.fav{background:linear-gradient(90deg,#fff7ed,#fff1c2);color:#b45309;border-color:rgba(180,83,9,0.08)}
+.action-link.remove{color:#ef4444;border:none;background:transparent;cursor:pointer}
+
+/* college card logo — circular variant */
+.card-logo {
+  width:64px;
+  height:64px;
+  object-fit:cover;      /* fill the circle, cropping if needed */
+  border-radius:50%;     /* make it circular */
+  background:#fff;
+  box-shadow:0 8px 18px rgba(2,6,23,0.06);
+  border:1px solid rgba(0,0,0,0.04);
+  flex:0 0 64px;
+  display:block;
+  align-self:center;
+}
+@media(max-width:640px){
+  .card-logo { width:52px; height:52px; }
+}
+
+
+/* drawer */
+.drawer{position:fixed;inset:0;right:0;top:0;background:linear-gradient(90deg, rgba(2,6,23,0.28), rgba(2,6,23,0.3));display:none;align-items:flex-start;justify-content:flex-end;padding:20px;z-index:60}
+.drawer[aria-hidden="false"]{display:flex}
+.drawer-content{width:100%;max-width:760px;background:var(--card);border-radius:12px;padding:20px;max-height:90vh;overflow:auto;border:1px solid rgba(15,23,42,0.04)}
+.close-btn{position:absolute;right:32px;top:24px;background:#fff;border-radius:999px;border:1px solid rgba(15,23,42,0.06);padding:6px 10px;cursor:pointer}
+
+/* drawer: college logo (NEW) */
+.college-drawer-logo {
+  width:84px;
+  height:84px;
+  object-fit:contain;
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 8px 22px rgba(2,6,23,0.08);
+  border:1px solid rgba(0,0,0,0.04);
+  flex:0 0 84px;
+}
+
+/* header inside drawer: ensure alignment when logo present */
+.drawer-content header { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+
+/* modal */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.28);z-index:70;opacity:0;pointer-events:none}
+.modal[aria-hidden="false"]{display:flex;opacity:1;pointer-events:auto}
+.modal-panel{background:var(--card);padding:18px;border-radius:12px;width:100%;max-width:420px;border:1px solid rgba(15,23,42,0.04);box-shadow:0 18px 40px rgba(2,6,23,0.08);transform:translateY(8px) scale(.99);opacity:0;transition:transform .28s cubic-bezier(.2,.9,.2,1), opacity .28s ease}
+.modal[aria-hidden="false"] .modal-panel{transform:translateY(0) scale(1);opacity:1}
+.modal-close{position:absolute;right:18px;top:18px;border:none;background:transparent;font-size:18px;cursor:pointer}
+.form{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.form input{padding:10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);outline:none}
+.form-row{display:flex;gap:8px}
+
+/* portal quick links */
+.portal-links{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.portal-links a{color:var(--accent);font-weight:700;text-decoration:none}
+
+/* footer */
+.site-footer{padding:18px 0;text-align:center;color:var(--muted);font-size:13px;margin-top:24px}
+
+/* responsive */
+@media(min-width:720px){
+  .grid-list{grid-template-columns:repeat(2,1fr)}
+  .hero{align-items:center}
+}
+@media(min-width:1100px){
+  .grid-list{grid-template-columns:repeat(3,1fr)}
+  .hero{gap:40px}
+}
+
+/* faculty circular avatar + animation */
+.faculty-grid{display:flex;flex-direction:column;gap:10px}
+.faculty-item{ display:flex; gap:12px; align-items:center; padding:10px; border-radius:12px; }
+.faculty-photo{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  object-fit:cover;
+  flex:0 0 64px;
+  border:3px solid rgba(255,255,255,0.6);
+  box-shadow:0 6px 18px rgba(2,6,23,0.08);
+  transition:transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease;
+  transform-origin:center center;
+}
+.faculty-item:hover .faculty-photo{ transform: translateY(-6px) scale(1.04); box-shadow:0 18px 30px rgba(2,6,23,0.12); }
+
+@keyframes floaty { 0%{transform:translateY(0)} 50%{transform:translateY(-4px)} 100%{transform:translateY(0)} }
+.faculty-photo.float { animation: floaty 6s ease-in-out infinite; }
+
+@keyframes fadeSlideUp {
+  0% { opacity:0; transform: translateY(22px); }
+  100% { opacity:1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideLeft {
+  0% { opacity:0; transform: translateX(-20px); }
+  100% { opacity:1; transform: translateX(0); }
+}
+
+@keyframes softPop {
+  0% { opacity:0; transform: scale(0.92); }
+  100% { opacity:1; transform: scale(1); }
+}
+
+@keyframes floatPhoto {
+  0% { transform:translateY(0px); }
+  50% { transform:translateY(-6px); }
+  100% { transform:translateY(0px); }
+}
+
+/* Applied to college cards */
+.card {
+  opacity:0;
+  animation: fadeSlideUp .55s ease forwards;
+}
+
+/* Faculty photos */
+.faculty-photo {
+  animation: fadeSlideUp .6s ease forwards, floatPhoto 6s ease-in-out infinite;
+}
+
+/* Bulletin */
+.bulletin-item {
+  opacity:0;
+  animation: fadeSlideLeft .6s ease forwards;
+}
+
+/* request list / request item animations */
+.request-item, .request-item .request-meta {
+  opacity:0;
+  transform:translateY(10px);
+  animation: fadeSlideUp .36s ease forwards;
+}
+.request-item { display:flex; gap:10px; align-items:flex-start; padding:10px; border-radius:10px; border:1px solid rgba(2,6,23,0.04); background:linear-gradient(180deg,#fff,#fbfbff); justify-content:space-between; }
+.request-meta{color:var(--muted);font-size:13px;margin-top:6px}
+.request-actions{display:flex;gap:8px;align-items:center}
+
+/* small responsive tweaks for request UI */
+@media(max-width:640px){
+  .modal-panel{margin:12px}
+  .hero-art{display:none}
+}
+
+/* =============================
+   MIET SLIDE LOGO HELPERS
+   (placed near hero/slide-related styles)
+   ============================= */
+.miet-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  --logo-size: 84px;        /* default logo size, override per-slide with inline style if needed */
+}
+
+.miet-logo {
+  position: absolute;
+  width: var(--logo-size);
+  height: var(--logo-size);
+  object-fit: contain;      /* use contain so logo does not crop */
+  border-radius: 12px;      /* rounded rectangular default; use 50% for circular variant */
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(2,6,23,0.10);
+  border: 1px solid rgba(0,0,0,0.04);
+  display: inline-block;
+  transition: transform .36s cubic-bezier(.2,.9,.2,1), right .36s ease, left .36s ease, top .36s ease, opacity .28s ease;
+  z-index: 25;
+  padding: 6px;             /* light padding inside border */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.miet-logo.round {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.miet-logo--left {
+  left: 18px;
+  top: calc(50% - var(--logo-size) / 2);
+  transform: translateY(0) scale(1);
+}
+
+.miet-logo--center {
+  left: 50%;
+  top: calc(50% - var(--logo-size) / 2);
+  transform: translateX(-50%) scale(1);
+}
+
+.miet-logo--right {
+  right: 18px;
+  top: calc(50% - var(--logo-size) / 2);
+  transform: translateY(0) scale(1);
+}
+
+.miet-logo--top-right {
+  right: 18px;
+  top: 18px;
+  transform: translateY(0) scale(1);
+}
+
+.miet-logo.small { --logo-size: 58px; width: var(--logo-size); height: var(--logo-size); }
+
+.miet-slide[data-position="left"] .miet-logo  { left:18px; right:auto; top: calc(50% - var(--logo-size) / 2); transform: translateY(0) scale(1); }
+.miet-slide[data-position="center"] .miet-logo{ left:50%; right:auto; top: calc(50% - var(--logo-size) / 2); transform: translateX(-50%) scale(1); }
+.miet-slide[data-position="right"] .miet-logo { right:18px; left:auto; top: calc(50% - var(--logo-size) / 2); transform: translateY(0) scale(1); }
+.miet-slide[data-position="top-right"] .miet-logo { right:18px; left:auto; top:18px; transform: translateY(0) scale(1); }
+
+@media(max-width:640px){
+  .miet-slide { --logo-size: 56px; }
+  .miet-logo--left, .miet-logo--center, .miet-logo--right {
+    top: 10px; /* move up on mobile to make room */
+    transform: none;
+  }
+  .miet-logo.small { --logo-size: 48px; }
+}
+
+/* =========================
+   Bulletin-style Student Wants
+   ========================= */
+.student-wants-card {
+  margin-top:14px;
+  padding:18px;
+  border-radius:14px;
+  background:
+    linear-gradient(180deg,#fff,#fbfbff);
+  border:1px solid rgba(15,23,42,0.04);
+  box-shadow: 0 12px 36px rgba(2,6,23,0.06);
+  position: relative;
+  overflow: visible;
+}
+
+.student-wants-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+.student-wants-header h4 {
+  margin:0;
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:0.2px;
+  color:var(--accent-2);
+}
+
+.wants-board {
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  padding:12px;
+  background:
+    linear-gradient(180deg, rgba(239,246,255,0.6), rgba(251,243,255,0.4));
+  border-radius:10px;
+  min-height:160px;
+}
+
+.want-note {
+  width: calc(33.333% - 8px);
+  min-width:200px;
+  background: #fffef9;
+  border-radius:10px;
+  padding:12px 12px 10px 12px;
+  box-shadow: 0 10px 24px rgba(2,6,23,0.06);
+  border:1px solid rgba(2,6,23,0.04);
+  position:relative;
+  transform-origin:center top;
+  transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease, opacity .18s ease;
+  word-wrap:break-word;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  font-size:13px;
+}
+
+.want-note.pinned {
+  box-shadow: 0 18px 44px rgba(2,6,23,0.12);
+  transform: translateY(-6px);
+  border-color: rgba(124,58,237,0.10);
+}
+
+.want-note::before {
+  content: "";
+  width:14px;
+  height:14px;
+  background: radial-gradient(circle at 40% 30%, #ffd1d1 0%, #ff8b8b 30%, #c85a5a 70%);
+  border-radius:50%;
+  position:absolute;
+  left:calc(50% - 7px);
+  top:-8px;
+  box-shadow: 0 3px 10px rgba(2,6,23,0.12);
+  transform: rotate(-12deg);
+  transition: transform .22s ease;
+  z-index:30;
+}
+
+.want-note.pinned::before { transform: translateY(-2px) rotate(-8deg) scale(1.05); }
+
+.want-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+.want-title { font-weight:800; font-size:14px; margin:0; color:#0f172a; }
+.want-meta { font-size:12px; color:var(--muted); }
+
+.want-tags { display:flex; gap:6px; flex-wrap:wrap; }
+.want-tag {
+  font-size:12px; padding:6px 8px; border-radius:999px;
+  background: linear-gradient(90deg,#fff7ed,#fff1c2); color:#b45309; font-weight:700;
+  border:1px solid rgba(180,83,9,0.06);
+}
+
+.want-actions {
+  display:flex; gap:8px; align-items:center; margin-left:auto;
+}
+.btn-note {
+  background:transparent; border:none; cursor:pointer; font-weight:700; font-size:12px; color:var(--muted);
+  padding:6px 8px; border-radius:8px;
+}
+.btn-note:hover { background: rgba(15,23,42,0.04); color:var(--accent); }
+
+.want-count {
+  background: linear-gradient(90deg,#eff6ff,#eef2ff); padding:6px 8px; border-radius:999px; color:var(--accent); font-weight:800; font-size:12px;
+  display:inline-flex; align-items:center; gap:6px;
+}
+
+.want-note:nth-child(4n+1) { transform: rotate(-1deg); }
+.want-note:nth-child(4n+2) { transform: rotate(0.4deg); }
+.want-note:nth-child(4n+3) { transform: rotate(-0.6deg); }
+.want-note:nth-child(4n+4) { transform: rotate(0.8deg); }
+
+.want-note.dismiss {
+  opacity:0; transform:translateY(10px) scale(.98); pointer-events:none;
+}
+
+@media(max-width:980px){
+  .want-note { width: calc(50% - 8px); }
+}
+@media(max-width:640px){
+  .wants-board { padding:10px; gap:10px; }
+  .want-note { width: 100%; min-width:unset; }
+  .want-note::before { left:18px; }
+}
+
+/* End of updated stylesheet */
